@@ -31,8 +31,8 @@ func _physics_process(_delta):
 	# This gives us the actual pixels to move this frame
 	# If direction is 1 and speed is 300, we get 300 pixels right
 	# If direction is -1 and speed is 300, we get -300 pixels (left)
-	
-	
+	velocity.x = xDirection * xSpeed
+	velocity.y = yDirection * ySpeed
 	# TODO: Calculate Y movement the same way
 	
 	
