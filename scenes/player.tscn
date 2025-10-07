@@ -802,7 +802,9 @@ animations = [{
 radius = 12.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+safe_margin = 0.001
 script = ExtResource("1_hf8rj")
+offset = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -30)

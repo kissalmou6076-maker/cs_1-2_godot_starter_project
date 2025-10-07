@@ -1,5 +1,7 @@
 extends CharacterBody2D
 @onready var _animation_player: AnimatedSprite2D = $AnimatedSprite2D
+var is_attacking=false
+var attack_timer=.67
 var projectile_original = preload("res://scenes/projectile.tscn")
 
 var xSpeed = 300.0
@@ -8,6 +10,7 @@ var facing = "down"
 var ySpeed = 300.0
 var yDirection = 0
 var coins = 0
+
 @export var offset : Vector2 = Vector2(0, -25)
 
 # TODO: Add health system variables
@@ -18,6 +21,13 @@ func _ready() -> void:
 	pass
 
 func _physics_process(_delta):
+	if Input.is_action_just_pressed("ui_accept"):
+		is_attacking=true
+	if is_attacking:
+		attack_timer-=_delta
+		if attack_timer<0:
+			is_attacking=false
+			attack_timer=.67
 	# TODO: Get horizontal input (left/right keys)
 	# Input.get_axis checks two keys and gives us a number:
 	# - When LEFT is pressed: returns -1.0
@@ -54,7 +64,10 @@ func _physics_process(_delta):
 	
 	# This is a special Godot function that makes the movement happen
 	move_and_slide()
-
+func on_body_enter(body):
+	if body.is_in_group("enemy"):
+	# hurt enemy.
+		pass
 # TODO: Create animation function (add this outside of _physics_process)
 func update_animation():
 	# TODO: Set the animation based on the facing direction
